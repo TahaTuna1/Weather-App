@@ -9,37 +9,80 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var isNight = false
-    
     
     var body: some View {
-        ZStack{
-            BackgroundView(isNight: $isNight)
-            VStack{
-                CityTextView(cityName: "Istanbul, TR")
-                MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "sun.dust.fill",
-                                      temp: "-3°")
-                HStack(spacing: 20){
-                    WeatherDayView(dayOfWeek: "MON", dayIcon: "cloud.snow.fill", dayDegree: "-3°")
-                    WeatherDayView(dayOfWeek: "TUE", dayIcon: "cloud.heavyrain.fill", dayDegree: "5°")
-                    WeatherDayView(dayOfWeek: "WED", dayIcon: "sun.dust.fill", dayDegree: "-1°")
-                    WeatherDayView(dayOfWeek: "THU", dayIcon: "cloud.rain.fill", dayDegree: "4°")
-                    WeatherDayView(dayOfWeek: "FRI", dayIcon: "cloud.fill", dayDegree: "2°")
-                }
-                Spacer()
+        VStack{
+            
+            ZStack{
                 
-                Button {
-                    isNight.toggle()
-                } label: {
-                    WeatherButton(title: "Change Day Time", textColor: isNight ? .black : .cyan, backgroundColor: isNight ? .offWhite : .offWhite)
-                }
-                Spacer()
+                Image("sunset2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+                    .frame(height: 400)
                 
-                
-                //MARK: Add LastUpdateView
+                VStack{
+                    CityTextView(cityName: "Istanbul").padding(.top, 10)
+                    
+                    Spacer()
+                    
+                    MainWeatherStatusView(imageName: "sun.dust", temp: "28°")
+                    
+                    Spacer()
+                    
+                    Button {
+                        //2
+                    } label: {
+                        
+                        ZStack {
+                            Circle().foregroundColor(.offWhite)
+                                .frame(width: 60, height: 60)
+                                .shadow(color: .black, radius: 0, x: 3, y: 3)
+                            
+                            Image(systemName: "location")
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
+                    }.offset(x: 120, y:70)
 
+                    
+                }
+                
             }
-        }
+            
+            Spacer()
+            
+            VStack {
+                
+                HStack{
+                    Text("Today")
+                        .font(.title)
+                    Spacer()
+                    Text("Istanbul, TR")
+                        .font(.title2)
+                }
+                .padding(EdgeInsets(top: 70, leading: 20, bottom: 25, trailing: 20))
+                
+                HStack(spacing: 25){
+                    
+                    WeatherDayView(dayOfWeek: "MON", dayIcon: "cloud.rain", dayDegree: "-3°")
+                    WeatherDayView(dayOfWeek: "TUE", dayIcon: "cloud.rain", dayDegree: "5°")
+                    WeatherDayView(dayOfWeek: "WED", dayIcon: "cloud.rain", dayDegree: "-1°")
+                    WeatherDayView(dayOfWeek: "THU", dayIcon: "cloud.rain", dayDegree: "4°")
+                    WeatherDayView(dayOfWeek: "FRI", dayIcon: "cloud.rain", dayDegree: "2°")
+                }
+                
+            }
+            
+            
+            
+            Spacer()
+            
+            
+            //MARK: Add LastUpdateView
+            
+            
+        }.background(Color.offWhite)
     }
     
 }
@@ -63,48 +106,43 @@ struct WeatherDayView: View {
             
             
             Text(dayOfWeek)
-                .foregroundColor(.offWhite)
-                .font(.system(size: 25, weight: .medium))
+                .foregroundColor(.black)
+                .font(.system(size: 20, weight: .light))
+            
             
             Image(systemName: dayIcon)
                 .symbolRenderingMode(.monochrome)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 35, height: 35)
-                .foregroundColor(.offWhite)
-            
-            Text(dayDegree).foregroundColor(.offWhite)
-                .font(.system(size: 30, weight: .medium))
+                .frame(width: 45, height: 45)
+                .foregroundColor(.black)
+                .fontWeight(.light)
+                
+            Text(dayDegree).foregroundColor(.black)
+                .font(.system(size: 25, weight: .light))
         }
     }
 }
 
 struct BackgroundView: View { //MARK: Background Gradient. Make it better
     
-    @Binding var isNight: Bool
+    
     
     var body: some View {
         
-        // CUSTOM GOOD GRADIENT
-        LinearGradient(gradient: Gradient(
-            colors: [isNight ? .black : .blue, isNight ? .gray : Color("lightBlue")]),
-                       startPoint: .topLeading,
-                       endPoint: .bottomTrailing)
-        .ignoresSafeArea()
-        
-        //APPLE'S DEFAULT EASY GRADIENT
-//        ContainerRelativeShape()
-//            .fill(isNight ? Color.cyan.gradient : Color.black.gradient)
-//            .ignoresSafeArea()
+        Image("sunset2")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .ignoresSafeArea()
     }
 }
 
 struct CityTextView: View {
     var cityName: String
     var body: some View{
-        Text(cityName).font(.system(size: 32, weight: .medium, design: .default))
+        Text(cityName).font(.system(size: 40, weight: .light, design: .default))
+            .shadow(color: .black, radius: 0, x: 2, y: 2)
             .foregroundColor(.offWhite)
-            .padding(20)
     }
 }
 
@@ -113,18 +151,21 @@ struct MainWeatherStatusView: View {
     var temp: String
     
     var body: some View {
-        VStack(spacing: 10){
-            Image(systemName: imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 120, height: 120)
-                .foregroundColor(.offWhite)
+        VStack{
             
             Text(temp).foregroundColor(.offWhite)
-                .font(.system(size: 80, weight: .medium))
+                .font(.system(size: 130, weight: .bold))
+                .offset(x: 20)
             
-        }.padding(50)
+//            Image(systemName: imageName)
+//                .renderingMode(.original)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 40, height: 40)
+//                .foregroundColor(.offWhite)
+                
+            
+        }.shadow(color: .black, radius: 0, x: 5, y: 5)
     }
 }
 
