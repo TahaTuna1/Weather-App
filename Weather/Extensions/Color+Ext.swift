@@ -7,8 +7,6 @@
 import SwiftUI
 
 extension Color {//MARK: Color Extensions
-    
     static let offWhite = Color("offWhite")
     static let offBlack = Color("offBlack")
-    
 }

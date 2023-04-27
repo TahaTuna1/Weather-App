@@ -10,9 +10,27 @@ import SwiftUI
 struct CityTextView: View { //MARK: City Name View
     var cityName: String
     var body: some View{
-        Text(cityName).font(.system(size: 40, weight: .light, design: .default))
-            .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
-            .foregroundColor(.offWhite)
+        HStack{
+            Image(systemName: "gear") //Settings
+                .foregroundColor(.offWhite)
+                .padding(.leading, 30)
+                .font(.system(size: 30))
+                .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+            
+            Spacer()
+            
+            Text(cityName).font(.system(size: 30, weight: .light, design: .default))
+                .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                .foregroundColor(.offWhite)
+            
+            Spacer()
+            
+            Image(systemName: "paintpalette") // Theme Selector
+                .foregroundColor(.offWhite)
+                .padding(.trailing, 30)
+                .font(.system(size: 30))
+                .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+        }.padding(.top, 10)
     }
 }
 

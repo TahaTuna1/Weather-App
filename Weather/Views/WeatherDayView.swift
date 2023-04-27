@@ -14,12 +14,9 @@ struct WeatherDayView: View { //MARK: Small Weather Daily Forecast View
     
     var body: some View {
         VStack{
-            
-            
             Text(dayOfWeek)
                 .foregroundColor(.offBlack)
                 .font(.system(size: 20, weight: .light))
-            
             
             Image(systemName: dayIcon)
                 .symbolRenderingMode(.monochrome)

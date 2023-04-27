@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct BackgroundView: View { //MARK: Background Image View
+    var image: String
     var body: some View {
         
-        Image("sunset2")
+        Image(image) //Background Image
             .resizable()
             .aspectRatio(contentMode: .fill)
             .ignoresSafeArea()
+            .frame(height: 400)
     }
 }
 
 
 struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundView()
+        BackgroundView(image: "sunset2")
     }
 }
