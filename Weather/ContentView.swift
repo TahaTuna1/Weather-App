@@ -15,34 +15,46 @@ struct ContentView: View {
             
             ZStack{
                 
-                Image("sunset2")
+                Image("sunset2") //Background Image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
                     .frame(height: 400)
                 
-                VStack{
-                    CityTextView(cityName: "Istanbul").padding(.top, 10)
+                VStack{ //MARK: Top Navigation Buttons - City Name
+                    HStack {
+                        Image(systemName: "gear") //Settings
+                            .foregroundColor(.offWhite)
+                            .padding(.leading, 30)
+                            .font(.system(size: 30))
+                            .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                        
+                        Spacer()
+                        
+                        CityTextView(cityName: "Istanbul").padding(.top, 10)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "paintpalette") // Theme Selector
+                            .foregroundColor(.offWhite)
+                            .padding(.trailing, 30)
+                            .font(.system(size: 30))
+                            .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                    }
+                    
+                    Spacer()
+                    //Large Temperature View
+                    MainWeatherStatusView(imageName: "sun.dust", temp: "12°")
                     
                     Spacer()
                     
-                    MainWeatherStatusView(imageName: "sun.dust", temp: "28°")
-                    
-                    Spacer()
-                    
+                    //Location Selection Button
                     Button {
-                        //2
+                        //button function
                     } label: {
                         
-                        ZStack {
-                            Circle().foregroundColor(.offWhite)
-                                .frame(width: 60, height: 60)
-                                .shadow(color: .black, radius: 0, x: 3, y: 3)
-                            
-                            Image(systemName: "location")
-                                .font(.title)
-                                .foregroundColor(.black)
-                        }
+                        LocationButtonView(icon: "location")
+                        
                     }.offset(x: 120, y:70)
 
                     
@@ -50,26 +62,27 @@ struct ContentView: View {
                 
             }
             
+            
             Spacer()
             
-            VStack {
+            VStack { //MARK: Buttom View
                 
                 HStack{
-                    Text("Today")
+                    Text("Sunday") //Day
                         .font(.title)
                     Spacer()
-                    Text("Istanbul, TR")
+                    Text("Istanbul, TR") // City and country code
                         .font(.title2)
                 }
                 .padding(EdgeInsets(top: 70, leading: 20, bottom: 25, trailing: 20))
                 
-                HStack(spacing: 25){
+                HStack(spacing: 25){ // Weekly Forecast View
                     
                     WeatherDayView(dayOfWeek: "MON", dayIcon: "cloud.rain", dayDegree: "-3°")
-                    WeatherDayView(dayOfWeek: "TUE", dayIcon: "cloud.rain", dayDegree: "5°")
-                    WeatherDayView(dayOfWeek: "WED", dayIcon: "cloud.rain", dayDegree: "-1°")
-                    WeatherDayView(dayOfWeek: "THU", dayIcon: "cloud.rain", dayDegree: "4°")
-                    WeatherDayView(dayOfWeek: "FRI", dayIcon: "cloud.rain", dayDegree: "2°")
+                    WeatherDayView(dayOfWeek: "TUE", dayIcon: "sun.dust", dayDegree: "5°")
+                    WeatherDayView(dayOfWeek: "WED", dayIcon: "cloud.sun.rain", dayDegree: "-1°")
+                    WeatherDayView(dayOfWeek: "THU", dayIcon: "cloud.bolt", dayDegree: "4°")
+                    WeatherDayView(dayOfWeek: "FRI", dayIcon: "cloud.snow", dayDegree: "2°")
                 }
                 
             }
@@ -94,79 +107,9 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-//MARK: Move the following views into separate View files
 
-struct WeatherDayView: View {
-    var dayOfWeek: String
-    var dayIcon: String
-    var dayDegree: String
-    
-    var body: some View {
-        VStack{
-            
-            
-            Text(dayOfWeek)
-                .foregroundColor(.black)
-                .font(.system(size: 20, weight: .light))
-            
-            
-            Image(systemName: dayIcon)
-                .symbolRenderingMode(.monochrome)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 45, height: 45)
-                .foregroundColor(.black)
-                .fontWeight(.light)
-                
-            Text(dayDegree).foregroundColor(.black)
-                .font(.system(size: 25, weight: .light))
-        }
-    }
-}
 
-struct BackgroundView: View { //MARK: Background Gradient. Make it better
-    
-    
-    
-    var body: some View {
-        
-        Image("sunset2")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .ignoresSafeArea()
-    }
-}
 
-struct CityTextView: View {
-    var cityName: String
-    var body: some View{
-        Text(cityName).font(.system(size: 40, weight: .light, design: .default))
-            .shadow(color: .black, radius: 0, x: 2, y: 2)
-            .foregroundColor(.offWhite)
-    }
-}
 
-struct MainWeatherStatusView: View {
-    var imageName: String
-    var temp: String
-    
-    var body: some View {
-        VStack{
-            
-            Text(temp).foregroundColor(.offWhite)
-                .font(.system(size: 130, weight: .bold))
-                .offset(x: 20)
-            
-//            Image(systemName: imageName)
-//                .renderingMode(.original)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 40, height: 40)
-//                .foregroundColor(.offWhite)
-                
-            
-        }.shadow(color: .black, radius: 0, x: 5, y: 5)
-    }
-}
 
 
