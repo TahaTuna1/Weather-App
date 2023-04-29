@@ -22,6 +22,6 @@ struct BackgroundView: View { //MARK: Background Image View
 
 struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundView(image: "sunset2")
+        BackgroundView(image: "sunsetist")
     }
 }
