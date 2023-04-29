@@ -11,7 +11,8 @@ struct LocationButtonView: View { //MARK: Location Selection Button
     var icon: String
     var body: some View {
         ZStack {
-            Circle().foregroundColor(.offWhite)
+            Rectangle().foregroundColor(.offWhite)
+                .cornerRadius(20)
                 .frame(width: 60, height: 60)
                 .shadow(color: .offBlack, radius: 0, x: 3, y: 3)
             

@@ -8,22 +8,32 @@
 import SwiftUI
 
 struct MainWeatherStatusView: View { //MARK: Large Temperature View
-    var imageName: String
+    var description: String
     var temp: String
     
     var body: some View {
-            Text(temp)
-            .foregroundColor(.offWhite)
-                .shadow(color: .offBlack, radius: 0, x: 5, y: 5)
-                .font(.system(size: 130, weight: .bold))
-                
-                
+        ZStack {
+            VStack{
+                Text(temp)
+                    .foregroundColor(.offWhite)
+                    .shadow(color: .offBlack, radius: 0, x: 5, y: 5)
+                    .font(.system(size: 130, weight: .bold))
+                Text(description)
+                    .foregroundColor(.offWhite)
+                    .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                    .font(.title)
+                    .fontWeight(.medium)
+            }
+            
+                    
+        }
+        
     }
 }
 
 
 struct MainWeatherStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        MainWeatherStatusView(imageName: "sun.dust", temp: "28°")
+        MainWeatherStatusView(description: "?Sunny?", temp: "28°")
     }
 }

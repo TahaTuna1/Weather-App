@@ -8,16 +8,19 @@
 import Foundation
 
 
-public struct Weather{
+public struct Weather {
     let city: String
     let temperature: String
     let description: String
     let iconName: String
+    let firstFiveDays: [(date: Date, temperature: String, description: String)]
     
-    init(response: APIResponse){
-        city = response.name
-        temperature = "\(Int(response.main.temp))"
-        description = response.weather.first?.description ?? ""
-        iconName = response.weather.first?.iconName ?? ""
+    
+    init(list: APIList, cityName: String, firstFiveDays: [(date: Date, temperature: String, description: String)]) {
+        city = cityName
+        temperature = "\(Int(list.main.temp))"
+        description = list.weather.first?.description ?? ""
+        iconName = list.weather.first?.main ?? ""
+        self.firstFiveDays = firstFiveDays
     }
 }

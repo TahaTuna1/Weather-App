@@ -29,18 +29,47 @@ public final class WeatherService: NSObject{
     
     // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
     private func makeDataRequest(forCoordinated coordinates: CLLocationCoordinate2D) {
-        guard let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(coordinates.latitude)&lon=\(coordinates.longitude)&appid=\(API_KEY)&units=metric"
-            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{ return }
-        
+        let urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(coordinates.latitude)&lon=\(coordinates.longitude)&appid=\(API_KEY)&units=metric"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil, let data = data else { return }
-            if let response = try? JSONDecoder().decode(APIResponse.self, from: data){
-                self.completionHandler?(Weather(response: response))
+            do {
+                
+                let apiResponse = try JSONDecoder().decode(APIResponse.self, from: data)
+                let cityName = apiResponse.city.name
+                
+                
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                
+                var firstFiveDays = [(date: Date, temperature: String, description: String)]()
+                
+                for item in apiResponse.list.prefix(10) {
+                    guard let date = dateFormatter.date(from: item.dt_txt) else { continue }
+                    let temperature = "\(Int(item.main.temp))°C"
+                    let description = item.weather.first?.description ?? ""
+                    let tuple = (date: date, temperature: temperature, description: description)
+                    firstFiveDays.append(tuple)
+                    
+                }
+                
+                
+                
+                guard let list = apiResponse.list.first else { return }
+                let weather = Weather(list: list, cityName: cityName, firstFiveDays: firstFiveDays)
+                
+                
+                
+                
+                self.completionHandler?(weather)
+            } catch {
+                print(error)
             }
         }.resume()
     }
+    
 }
 
 extension WeatherService: CLLocationManagerDelegate{
@@ -54,23 +83,26 @@ extension WeatherService: CLLocationManagerDelegate{
     }
 }
 
-struct APIResponse: Codable{
-    let name: String
-    let main: APIMain
-    let weather: [APIWeather]
+struct APIResponse: Codable {
+    let list: [APIList]
+    let city: APICity
 }
 
-struct APIMain: Codable{
+struct APICity: Codable {
+    let name: String
+}
+
+struct APIList: Codable {
+    let main: APIMain
+    let weather: [APIWeather]
+    let dt_txt: String
+}
+
+struct APIMain: Codable {
     let temp: Double
 }
 
-struct APIWeather: Codable{
-    
+struct APIWeather: Codable {
+    let main: String
     let description: String
-    let iconName: String
-    
-    enum CodingKeys: String, CodingKey{
-        case description
-        case iconName = "main"
-    }
 }

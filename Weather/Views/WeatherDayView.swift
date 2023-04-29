@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct WeatherDayView: View { //MARK: Small Weather Daily Forecast View
-    var dayOfWeek: String
+    var time: String
     var dayIcon: String
     var dayDegree: String
     
     var body: some View {
         VStack{
-            Text(dayOfWeek)
+            Text(time)
                 .foregroundColor(.offBlack)
                 .font(.system(size: 20, weight: .light))
             
@@ -26,6 +26,8 @@ struct WeatherDayView: View { //MARK: Small Weather Daily Forecast View
                 .foregroundColor(.offBlack)
                 .fontWeight(.light)
                 
+            
+            
             Text(dayDegree).foregroundColor(.offBlack)
                 .font(.system(size: 25, weight: .light))
         }
@@ -34,6 +36,6 @@ struct WeatherDayView: View { //MARK: Small Weather Daily Forecast View
 
 struct WeatherDayView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDayView(dayOfWeek: "MON", dayIcon: "cloud.rain", dayDegree: "-3°")
+        WeatherDayView(time: "00:00", dayIcon: "cloud.rain", dayDegree: "-3°")
     }
 }
