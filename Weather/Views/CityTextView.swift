@@ -7,15 +7,22 @@
 
 import SwiftUI
 
-struct CityTextView: View { //MARK: City Name View
+struct CityTextView: View { //MARK: City Name View and Theme Switcher
     var cityName: String
+    @Binding var imageIndex: Int
+    
     var body: some View{
         HStack{
-            Image(systemName: "gear") //Settings
+            Image(systemName: "chevron.left")
                 .foregroundColor(.offWhite)
                 .padding(.leading, 30)
                 .font(.system(size: 30))
                 .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                .onTapGesture {
+                    if imageIndex > 0 {
+                        imageIndex -= 1
+                    }
+                }
             
             Spacer()
             
@@ -25,17 +32,18 @@ struct CityTextView: View { //MARK: City Name View
             
             Spacer()
             
-            Image(systemName: "paintpalette") // Theme Selector
+            Image(systemName: "chevron.right")
                 .foregroundColor(.offWhite)
                 .padding(.trailing, 30)
                 .font(.system(size: 30))
                 .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
+                .onTapGesture {
+                    if imageIndex < BG.allImages.count - 1{
+                        imageIndex += 1
+                    }
+                }
         }.padding(.top, 10)
-    }
-}
-
-struct CityTextView_Previews: PreviewProvider {
-    static var previews: some View {
-        CityTextView(cityName: "Istanbul").padding(.top, 10)
+            
+        
     }
 }

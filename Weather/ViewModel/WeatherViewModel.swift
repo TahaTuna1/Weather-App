@@ -41,7 +41,7 @@ struct WeatherIcon {
 
 
 public class WeatherViewModel: ObservableObject{
-    @Published var cityName: String = "City Name"
+    @Published var cityName: String = "--"
     @Published var temperature: String = "--"
     @Published var weatherDescription: String = "--"
     @Published var weatherIcon: String = defaultIcon

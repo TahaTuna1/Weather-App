@@ -9,16 +9,17 @@ import SwiftUI
 
 struct WeatherView: View {
     @ObservedObject var viewModel: WeatherViewModel
+    @State var imageIndex = 0
     
     var body: some View {
         VStack{
             ZStack{
-                
-                BackgroundView(image: BG.lakeHouse)// Background Image
+//                static let allImages = [carWinter, deerMist, deerSunrise, deerSunset, foxWinter, lakeHouse, rain, sunnyScene]
+                BackgroundView(image: BG.allImages[imageIndex])// Background Image
                 
                 VStack{ //MARK: Top Navigation Buttons - City Name
                     
-                    CityTextView(cityName: viewModel.cityName)
+                    CityTextView(cityName: viewModel.cityName, imageIndex: $imageIndex)
                     
                     
                     Spacer()

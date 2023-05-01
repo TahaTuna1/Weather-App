@@ -18,14 +18,14 @@ struct MainWeatherStatusView: View { //MARK: Large Temperature View
                     .foregroundColor(.offWhite)
                     .shadow(color: .offBlack, radius: 0, x: 5, y: 5)
                     .font(.system(size: 130, weight: .bold))
+                    
                 Text(description)
                     .foregroundColor(.offWhite)
                     .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
                     .font(.title)
                     .fontWeight(.medium)
-            }
-            
                     
+            }
         }
         
     }

@@ -18,6 +18,7 @@ struct BG {//MARK: Custom Background Images
     static let sunnyScene = "sunnyScene"
     
     static let allImages = [carWinter, deerMist, deerSunrise, deerSunset, foxWinter, lakeHouse, rain, sunnyScene]
+    
 }
 
 
