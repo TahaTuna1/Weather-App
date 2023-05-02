@@ -26,6 +26,7 @@ struct WeatherView: View {
                     
                     //Large Temperature View
                     MainWeatherStatusView(description: viewModel.weatherDescription, temp: viewModel.temperature)
+                        
                     
                     Spacer()
                     

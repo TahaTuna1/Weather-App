@@ -16,6 +16,7 @@ struct BackgroundView: View { //MARK: Background Image View
             .aspectRatio(contentMode: .fill)
             .ignoresSafeArea()
             .frame(height: 400)
+            
     }
 }
 

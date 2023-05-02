@@ -19,8 +19,10 @@ struct CityTextView: View { //MARK: City Name View and Theme Switcher
                 .font(.system(size: 30))
                 .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
                 .onTapGesture {
-                    if imageIndex > 0 {
-                        imageIndex -= 1
+                    withAnimation {
+                        if imageIndex > 0 {
+                            imageIndex -= 1
+                        }
                     }
                 }
             
@@ -38,8 +40,10 @@ struct CityTextView: View { //MARK: City Name View and Theme Switcher
                 .font(.system(size: 30))
                 .shadow(color: .offBlack, radius: 0, x: 2, y: 2)
                 .onTapGesture {
-                    if imageIndex < BG.allImages.count - 1{
-                        imageIndex += 1
+                    withAnimation {
+                        if imageIndex < BG.allImages.count - 1{
+                            imageIndex += 1
+                        }
                     }
                 }
         }.padding(.top, 10)
